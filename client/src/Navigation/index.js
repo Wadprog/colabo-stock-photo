@@ -1,16 +1,16 @@
 import React from 'react'
-import { Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
-import Landing from 'pages/landing'
-import Login from 'pages/Login'
-export const Navigation = (props) => {
+import Landing from '../pages_hooks/Landing'
+import Login from '../pages_hooks/Login'
+
+const Navigation = (props) => {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
-      <Route path="login" element={<Login />} />
+      <Route path="/login" element={<Login />} />
     </Routes>
   )
 }
-
 
 export default Navigation

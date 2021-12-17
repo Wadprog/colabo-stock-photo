@@ -1,9 +1,11 @@
 import React from 'react'
-import HomePage from './pages/Landing'
+import useAuthContext from './hooks/useAuthContext'
 import Routes from './Navigation'
 
 function App() {
-  return <Routes />
+  const { authIsReady } = useAuthContext()
+
+  return <>{authIsReady && <Routes />}</>
 }
 
 export default App
