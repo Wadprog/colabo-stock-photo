@@ -1,15 +1,12 @@
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Login from "./pages/login";
-import Home from "./pages/home";
+
+import React from 'react'
+import useAuthContext from './hooks/useAuthContext'
+import Routes from './Navigation'
 
 function App() {
-  return (
-    <div>
-      {/*}  <Login /> {*/}
-      <Home />
-    </div>
-  );
+  const { authIsReady } = useAuthContext()
+
+  return <>{authIsReady && <Routes />}</>
 }
 
-export default App;
+export default App
