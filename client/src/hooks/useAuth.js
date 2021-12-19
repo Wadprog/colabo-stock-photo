@@ -1,4 +1,4 @@
-import { auth } from '../configs/firebase'
+import { auth, storage, db } from '../configs/firebase'
 import { useState, useEffect } from 'react'
 
 // core components
@@ -11,23 +11,31 @@ const useAuth = () => {
   const [isLoading, setLoading] = useState(false)
   const { dispatch, Types } = useAuthContext()
 
-  const signup = async (email, password, displayName) => {
-    console.log(Object.keys(auth))
+  const signup = async (data) => {
+    const { email, password } = data
+    console.log('the data value from the from', Object.keys(data))
+
     if (error) setError(null)
     setLoading(true)
     try {
       //signup the user
-      const response = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      )
+      const res = await auth.createUserWithEmailAndPassword(email, password)
+      if (!res) throw new Error('Cannot complete the sign up process')
+      const displayName = data.displayName ? data.displayName : data.firstName
+      const uploadPath = `profilePics/${res.user.uid}/${data.profileImage.name}`
+      const img = await storage.ref(uploadPath).put(data.profileImage)
+      const imgUrl = await img.ref.getDownloadURL()
+      // add display AND PHOTO_URL name to user
+      await res.user.updateProfile({ displayName, photoURL: imgUrl })
 
-      // To remove
-      console.log(response.user)
-      if (!response) throw new Error('Cannot complete the sign up process')
+      // create a user document
+      await db.collection('users').doc(res.user.uid).set({
+        online: true,
+        displayName,
+        photoURL: imgUrl,
+      })
 
-      await response.user.updateProfile({ displayName })
-      dispatch({ type: Types.USER_LOGGED_IN, payload: response.user })
+      dispatch({ type: Types.USER_LOGGED_IN, payload: res.user })
       if (!isCancelled) {
         setLoading(false)
         setError(null)
@@ -44,9 +52,11 @@ const useAuth = () => {
     setLoading(true)
     setError(null)
     try {
-      const response = await auth.signInWithEmailAndPassword(email, password)
-      if (!response) throw new Error('We could not sign the user in')
-      dispatch({ type: Types.USER_LOGGED_IN, payload: response.user })
+      const res = await auth.signInWithEmailAndPassword(email, password)
+      if (!res) throw new Error('We could not sign the user in')
+      const documentRef = db.collection('users').doc(res.user.uid)
+      await documentRef.update({ online: true })
+      dispatch({ type: Types.USER_LOGGED_IN, payload: res.user })
       if (!isCancelled) {
         setLoading(false)
         setError(null)
@@ -62,9 +72,13 @@ const useAuth = () => {
   const logout = async () => {
     setLoading(true)
     try {
+      const { uid } = auth.currentUser
+      await db.collection('users').doc(uid).update({ online: false })
       await auth.signOut()
+
       if (!isCancelled) {
         setLoading(false)
+        setError(null)
       }
       dispatch({ type: Types.USER_LOGGED_OUT })
     } catch (error) {

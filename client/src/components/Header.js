@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import {
   Navbar,
   NavbarBrand,
@@ -11,14 +11,13 @@ import {
   DropdownMenu,
   DropdownToggle,
   DropdownItem,
-  NavbarText,
-} from "reactstrap";
+} from 'reactstrap'
 
 const Header = () => (
   <div>
     <Navbar expand="md">
       <NavbarBrand href="#">
-        {" "}
+        {' '}
         <img
           src="https://www.collabohtbrandingagcy.com/wp-content/uploads/2021/05/logocollaboht-white.png"
           class="logo bg-branding1"
@@ -48,18 +47,9 @@ const Header = () => (
             </DropdownMenu>
           </UncontrolledDropdown>
         </Nav>
-        <button
-          type="submit"
-          class="btn btn-blue bg-branding1 text-center mx-4"
-        >
-          Login
-        </button>
-        <button type="submit" class="btn btn-blue bg-branding1 text-center">
-          Signup
-        </button>
       </Collapse>
     </Navbar>
   </div>
-);
+)
 
-export default Header;
+export default Header

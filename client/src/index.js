@@ -7,8 +7,8 @@ import { BrowserRouter } from 'react-router-dom'
 import { AuthContextProvider } from './context/AuthContext'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import "font-awesome/css/font-awesome.min.css";
-import "jquery/dist/jquery.min.js";
+//import "font-awesome/css/font-awesome.min.css";
+//import "jquery/dist/jquery.min.js";
 
 ReactDOM.render(
   <React.StrictMode>

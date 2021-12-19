@@ -1,15 +1,28 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 
-import Landing from '../pages_hooks/Landing'
-import Login from '../pages_hooks/Login'
+// Custom components
+import useAuthContext from '../hooks/useAuthContext'
+import AdminLayout from '../layouts/Admin'
+import AuthLayout from '../layouts/Auth/Auth.js'
 
-const Navigation = (props) => {
+const Navigation = () => {
+  const { user } = useAuthContext()
   return (
-    <Routes>
-      <Route path="/" element={<Landing />} />
-      <Route path="/login" element={<Login />} />
-    </Routes>
+    <>
+      {user ? (
+        <Switch>
+          <Route path="/" render={(props) => <AdminLayout {...props} />} />
+        </Switch>
+      ) : (
+        <>
+          {console.log('no user')}
+          <Switch>
+            <Route path="/" render={(props) => <AuthLayout {...props} />} />
+          </Switch>
+        </>
+      )}
+    </>
   )
 }
 
