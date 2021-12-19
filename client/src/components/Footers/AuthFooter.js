@@ -1,4 +1,4 @@
-import { NavItem, NavLink, Nav, Container, Row, Col } from 'reactstrap';
+import { NavItem, NavLink, Nav, Container, Row, Col } from 'reactstrap'
 
 const Footer = () => {
   return (
@@ -10,7 +10,7 @@ const Footer = () => {
               <div className="copyright text-center text-xl-left text-muted">
                 © {new Date().getFullYear()}{' '}
                 <a className="font-weight-bold ml-1" href="/" target="_blank">
-                  KayimitExchange
+                  Collabo
                 </a>
               </div>
             </Col>
@@ -38,7 +38,7 @@ const Footer = () => {
         </Container>
       </footer>
     </>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

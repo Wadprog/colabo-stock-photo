@@ -26,7 +26,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                Wadson Vaval
+                WebVitals
               </NavLink>
             </NavItem>
 
@@ -36,7 +36,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                About Me
+                GerVens
               </NavLink>
             </NavItem>
           </Nav>
