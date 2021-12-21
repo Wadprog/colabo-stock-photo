@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "./Gallery/Image";
 import SingleImage from "./Gallery/SingleImage";
 import { picture } from "../data/picture";
 

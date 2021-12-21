@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -11,13 +11,13 @@ import {
   DropdownMenu,
   DropdownToggle,
   DropdownItem,
-} from 'reactstrap'
+} from "reactstrap";
 
 const Header = () => (
   <div>
     <Navbar expand="md">
       <NavbarBrand href="#">
-        {' '}
+        {" "}
         <img
           src="https://www.collabohtbrandingagcy.com/wp-content/uploads/2021/05/logocollaboht-white.png"
           class="logo bg-branding1"
@@ -50,6 +50,6 @@ const Header = () => (
       </Collapse>
     </Navbar>
   </div>
-)
+);
 
-export default Header
+export default Header;
