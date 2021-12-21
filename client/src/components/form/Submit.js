@@ -2,7 +2,7 @@ import { useFormikContext } from 'formik'
 
 import { Button } from 'reactstrap'
 
-function SubmitBtn({ title, ...otherProps }) {
+function SubmitBtn({ title, Icon, ...otherProps }) {
   const { handleSubmit } = useFormikContext()
 
   return (
@@ -12,7 +12,7 @@ function SubmitBtn({ title, ...otherProps }) {
       onClick={handleSubmit}
       {...otherProps}
     >
-      {title}
+      {title} {Icon && <Icon />}
     </Button>
   )
 }

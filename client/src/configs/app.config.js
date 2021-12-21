@@ -14,6 +14,10 @@ const environment = {
       AuthIN: '/index',
       LANDING: '/landing',
     },
+    profileImageSettings: {
+      FILE_SIZE: 160 * 1024,
+      SUPPORTED_FORMATS: ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'],
+    },
     layouts: {
       ADMIN: '/admin',
       AUTH: '/auth',
