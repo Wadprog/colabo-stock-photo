@@ -55,7 +55,7 @@ const Auth = () => {
             <Switch>
               {getRoutes(routes)}
 
-              <Redirect exact path="/" to="/auth/landing" />
+              <Redirect path="/" to="/auth/landing" />
             </Switch>
           </Row>
         </Container>

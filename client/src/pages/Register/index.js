@@ -1,23 +1,23 @@
 import React from 'react'
+import { object, string } from 'yup'
 import { Link } from 'react-router-dom'
-import * as Yup from 'yup'
-import { CardBody, CardHeader, Card, Row, Col } from 'reactstrap'
+import { CardBody, CardHeader, Card, Row, Col, Spinner } from 'reactstrap'
 
 // Custom component
-import routes from 'configs/app.config.js'
 import useAuth from 'hooks/useAuth'
-import { imageValidator } from 'Validation'
+import routes from 'configs/app.config.js'
 import PageWrapper from 'components/PageWrapper'
 import { Form, Field, Submit, ImgInput } from 'components/form'
+import { imageValidator, passwordValidator, emailValidator } from 'Validation'
 
 const Register = () => {
-  const { signup, loading, error } = useAuth()
+  const { signup, isLoading, error } = useAuth()
   const handleSubmit = (data, form) => {
     signup(data)
     form.resetForm()
   }
   return (
-    <PageWrapper isLoading={loading}>
+    <PageWrapper isLoading={false}>
       <Col lg="5" md="7">
         <Card className=" border-0">
           <CardHeader className="bg-transparent pb-5">
@@ -119,7 +119,11 @@ const Register = () => {
                   </div>
                 </Col>
               </Row> */}
-              <Submit title="Register" />
+              <Submit
+                disabled={isLoading}
+                title={isLoading ? 'Loading ...' : 'Register'}
+                Icon={isLoading ? Spinner : null}
+              />
             </Form>
           </CardBody>
         </Card>
@@ -138,11 +142,11 @@ const Register = () => {
 
 export default Register
 
-const ValidationSchema = Yup.object().shape({
-  email: Yup.string().email().required().label('Email/UserName'),
-  firstName: Yup.string().required().min(2).label('Email/UserName'),
-  lastName: Yup.string().required().min(2).label('Email/UserName'),
-  password: Yup.string().required().min(4).label('password'),
-  phone: Yup.string().required().min(4).label('Phone'),
+const ValidationSchema = object().shape({
+  email: emailValidator.required(),
+  firstName: string().required().min(2).label('First name'),
+  lastName: string().required().min(2).label('Last name'),
+  password: passwordValidator,
+  phone: string().required().min(4).label('Phone number'),
   profileImage: imageValidator,
 })

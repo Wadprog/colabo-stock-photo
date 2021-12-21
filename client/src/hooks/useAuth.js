@@ -12,34 +12,37 @@ const useAuth = () => {
   const { dispatch, Types } = useAuthContext()
 
   const signup = async (data) => {
-    const { email, password } = data
+    const { email, password, profileImage, ...otherFields } = data
     console.log('the data value from the from', Object.keys(data))
 
-    if (error) setError(null)
+    setError(null)
     setLoading(true)
     try {
       //signup the user
       const res = await auth.createUserWithEmailAndPassword(email, password)
       if (!res) throw new Error('Cannot complete the sign up process')
       const displayName = data.displayName ? data.displayName : data.firstName
-      const uploadPath = `profilePics/${res.user.uid}/${data.profileImage.name}`
-      const img = await storage.ref(uploadPath).put(data.profileImage)
+      const uploadPath = `profilePics/${res.user.uid}/${profileImage.name}`
+      const img = await storage.ref(uploadPath).put(profileImage)
       const imgUrl = await img.ref.getDownloadURL()
       // add display AND PHOTO_URL name to user
       await res.user.updateProfile({ displayName, photoURL: imgUrl })
 
       // create a user document
-      await db.collection('users').doc(res.user.uid).set({
-        online: true,
-        displayName,
-        photoURL: imgUrl,
-      })
-
-      dispatch({ type: Types.USER_LOGGED_IN, payload: res.user })
-      if (!isCancelled) {
-        setLoading(false)
-        setError(null)
-      }
+      await db
+        .collection('users')
+        .doc(res.user.uid)
+        .set({
+          online: true,
+          displayName,
+          photoURL: imgUrl,
+          ...otherFields,
+        })
+      const userData = await db.collection('users').doc(res.user.uid).get()
+      const user = { id: userData.id, ...userData.data() }
+      console.log('finale user', user)
+      dispatch({ type: Types.USER_LOGGED_IN, payload: user })
+      if (!isCancelled) setLoading(false)
     } catch (error) {
       console.error(error)
       if (!isCancelled) {
@@ -56,7 +59,9 @@ const useAuth = () => {
       if (!res) throw new Error('We could not sign the user in')
       const documentRef = db.collection('users').doc(res.user.uid)
       await documentRef.update({ online: true })
-      dispatch({ type: Types.USER_LOGGED_IN, payload: res.user })
+      const userData = await documentRef.get()
+      const user = { id: userData.id, ...userData.data() }
+      dispatch({ type: Types.USER_LOGGED_IN, payload: user })
       if (!isCancelled) {
         setLoading(false)
         setError(null)

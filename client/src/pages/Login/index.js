@@ -1,21 +1,30 @@
 import React from 'react'
-import * as Yup from 'yup'
+import { object } from 'yup'
 import { Link } from 'react-router-dom'
-import { Card, CardHeader, CardBody, Row, Col, CardFooter } from 'reactstrap'
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Row,
+  Col,
+  CardFooter,
+  Spinner,
+} from 'reactstrap'
 
 import useAuth from 'hooks/useAuth'
 import routes from 'configs/app.config'
 import PageWrapper from 'components/PageWrapper'
 import { Form, Field, Submit } from 'components/form'
+import { emailValidator, passwordValidator } from 'Validation'
 
 const Login = () => {
-  const { loading, error, login } = useAuth()
+  const { isLoading, error, login } = useAuth()
   const handleLogin = ({ email, password }, form) => {
     login(email, password)
     form.resetForm()
   }
   return (
-    <PageWrapper isLoading={loading}>
+    <PageWrapper isLoading={isLoading}>
       <Card className=" border-0">
         <Row className=" d-flex">
           <Col lg="6" className="d-none d-lg-block">
@@ -81,7 +90,13 @@ const Login = () => {
                     type="password"
                     autoComplete="new-email"
                   />
-                  <Submit title="Login" />
+                  {
+                    <Submit
+                      disabled={isLoading}
+                      title={isLoading ? 'Loading...' : 'Sign in'}
+                      Icon={isLoading ? Spinner : null}
+                    />
+                  }
                 </Form>
               </CardBody>
               <CardFooter className="border-0">
@@ -114,7 +129,7 @@ const Login = () => {
 
 export default Login
 
-const ValidationSchema = Yup.object().shape({
-  email: Yup.string().required().min(2).label('Email/UserName'),
-  password: Yup.string().required().min(4).label('password'),
+const ValidationSchema = object().shape({
+  email: emailValidator.required(),
+  password: passwordValidator,
 })

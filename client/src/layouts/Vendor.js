@@ -65,11 +65,11 @@ const Admin = (props) => {
 
   return (
     <>
-      {user?.isVendor && <Sidebar {...props} routes={routes} />}
+      <Sidebar {...props} routes={routes} />
       <div className="main-content" ref={mainContent}>
         <AdminNavbar
           {...props}
-          brandText={getBrandText(props.location.pathname)}
+          brandText={'getBrandText(props.location.pathname)'}
         />
         <Switch>
           {getRoutes(routes)}
