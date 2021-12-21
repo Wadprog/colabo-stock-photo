@@ -1,149 +1,27 @@
 import React from "react";
-import { Card, CardBody, Button, CardImg, CardGroup } from "reactstrap";
+import SingleImage from "./Gallery/SingleImage";
+import { picture } from "../data/picture";
 
 const Gallery = () => {
   return (
-    <div className="py-3">
-      <CardGroup>
-        <Card className="mx-3">
-          <CardBody>
-            <CardImg
-              alt="Card image cap"
-              src="https://source.unsplash.com/user/c_v_r/600x600"
-              top
-              width="100%"
-            />
-          </CardBody>
-          <Button className="bg-branding2 m-3">Download</Button>
-        </Card>
-        <Card className="mx-3">
-          <CardBody>
-            <CardImg
-              alt="Card image cap"
-              src="https://source.unsplash.com/user/c_v_r/600x600"
-              top
-              width="100%"
-            />
-          </CardBody>
-          <Button className="bg-branding2 m-2">Download</Button>
-        </Card>
-        <Card>
-          <CardBody>
-            <CardImg
-              alt="Card image cap"
-              src="https://source.unsplash.com/user/c_v_r/600x600"
-              top
-              width="100%"
-            />
-          </CardBody>
-          <Button className="bg-branding2 m-2">Download</Button>
-        </Card>
-      </CardGroup>
-      <CardGroup>
-        <Card className="mx-3">
-          <CardBody>
-            <CardImg
-              alt="Card image cap"
-              src="https://source.unsplash.com/user/c_v_r/600x600"
-              top
-              width="100%"
-            />
-          </CardBody>
-          <Button className="bg-branding2 m-3">Download</Button>
-        </Card>
-        <Card className="mx-3">
-          <CardBody>
-            <CardImg
-              alt="Card image cap"
-              src="https://source.unsplash.com/user/c_v_r/600x600"
-              top
-              width="100%"
-            />
-          </CardBody>
-          <Button className="bg-branding2 m-2">Download</Button>
-        </Card>
-        <Card>
-          <CardBody>
-            <CardImg
-              alt="Card image cap"
-              src="https://source.unsplash.com/user/c_v_r/600x600"
-              top
-              width="100%"
-            />
-          </CardBody>
-          <Button className="bg-branding2 m-2">Download</Button>
-        </Card>
-      </CardGroup>
-      <CardGroup>
-        <Card className="mx-3">
-          <CardBody>
-            <CardImg
-              alt="Card image cap"
-              src="https://source.unsplash.com/user/c_v_r/600x600"
-              top
-              width="100%"
-            />
-          </CardBody>
-          <Button className="bg-branding2 m-3">Download</Button>
-        </Card>
-        <Card className="mx-3">
-          <CardBody>
-            <CardImg
-              alt="Card image cap"
-              src="https://source.unsplash.com/user/c_v_r/600x600"
-              top
-              width="100%"
-            />
-          </CardBody>
-          <Button className="bg-branding2 m-2">Download</Button>
-        </Card>
-        <Card>
-          <CardBody>
-            <CardImg
-              alt="Card image cap"
-              src="https://source.unsplash.com/user/c_v_r/600x600"
-              top
-              width="100%"
-            />
-          </CardBody>
-          <Button className="bg-branding2 m-2">Download</Button>
-        </Card>
-      </CardGroup>
-      <CardGroup>
-        <Card className="mx-3">
-          <CardBody>
-            <CardImg
-              alt="Card image cap"
-              src="https://source.unsplash.com/user/c_v_r/600x600"
-              top
-              width="100%"
-            />
-          </CardBody>
-          <Button className="bg-branding2 m-3">Download</Button>
-        </Card>
-        <Card className="mx-3">
-          <CardBody>
-            <CardImg
-              alt="Card image cap"
-              src="https://source.unsplash.com/user/c_v_r/600x600"
-              top
-              width="100%"
-            />
-          </CardBody>
-          <Button className="bg-branding2 m-2">Download</Button>
-        </Card>
-        <Card>
-          <CardBody>
-            <CardImg
-              alt="Card image cap"
-              src="https://source.unsplash.com/user/c_v_r/600x600"
-              top
-              width="100%"
-            />
-          </CardBody>
-          <Button className="bg-branding2 m-2">Download</Button>
-        </Card>
-      </CardGroup>
+    <div className="py-3 row">
+      {picture.map((img) => {
+        return (
+          <SingleImage
+            id={img.id}
+            src={img.src}
+            title={img.title}
+            vendor={img.vendor}
+            price={img.price}
+            date={img.date}
+            format={img.format}
+            size={img.size}
+            alt={img.alt}
+            width={img.width}
+            height={img.height}
+          />
+        );
+      })}
     </div>
   );
 };
