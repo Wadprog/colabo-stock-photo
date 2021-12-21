@@ -23,7 +23,6 @@ const Gallery = () => {
           />
         );
       })}
-      <SingleImage />
     </div>
   );
 };
