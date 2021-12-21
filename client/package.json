@@ -24,7 +24,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts craco-build",
+    "build": "react-scripts build",
     "test": "react-scripts craco-test",
     "craco-build": "craco build",
     "craco-test": "craco test",
