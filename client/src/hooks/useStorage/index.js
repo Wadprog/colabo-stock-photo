@@ -16,10 +16,8 @@ const useStorage = (collection) => {
     const uploadPath = `${collection}/${user.id}/${doc.name}`
     console.log('uploading docs ...')
     try {
-      //   const file = await storage.ref(uploadPath).put(doc)
-      console.log('in the try')
       const uploadTask = storage.ref().child(uploadPath).put(doc)
-      console.log(Object.keys(uploadTask))
+
       uploadTask.on(
         'state_changed',
         (snapshot) => {
@@ -44,15 +42,6 @@ const useStorage = (collection) => {
           })
         }
       )
-      //   const fileUrl = await file.ref.getDownloadURL()
-      //   const fileData = await db
-      //     .collection(collection)
-      //     .add({ author: user.id, fileUrl })
-      //   if (!isCanceled) {
-      //     setDocument(fileData)
-      //     setError(null)
-      //     setLoading(false)
-      //   }
     } catch (e) {
       console.log('some error', e)
       if (!isCanceled) {
@@ -62,6 +51,7 @@ const useStorage = (collection) => {
       }
     }
   }
+
   useEffect(() => {
     setProgress(null)
     return () => {
@@ -69,7 +59,13 @@ const useStorage = (collection) => {
     }
   }, [])
 
-  return { document, isLoading, error, uploadDocument, progress }
+  return {
+    document,
+    isLoading,
+    error,
+    uploadDocument,
+    progress,
+  }
 }
 
 export default useStorage
