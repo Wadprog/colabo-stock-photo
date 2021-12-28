@@ -1,30 +1,27 @@
 import React from 'react'
+import { Row, Col } from 'reactstrap'
 import SingleImage from './Gallery/SingleImage'
 import { picture } from '../data/picture'
 import useCollection from '../hooks/useCollection'
+import ImageComponent from './Img'
+
 const Gallery = () => {
   const { documents, error, isLoading } = useCollection('test')
 
   if (error) return <p>error</p>
 
   return (
-    <div className="py-3 row">
+    <Row>
       {!isLoading ? (
         <>
-          {documents &&
-            documents.map(({ fileUrl, ...otherProps }) => (
-              <SingleImage
-                {...otherProps}
-                src={fileUrl}
-                height={picture[0].height}
-                width={picture[0].width}
-              />
-            ))}
+          {documents?.map((doc) => (
+            <ImageComponent src={doc.fileUrl} />
+          ))}
         </>
       ) : (
         <p>Loading</p>
       )}
-    </div>
+    </Row>
   )
 }
 
