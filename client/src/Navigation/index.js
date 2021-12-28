@@ -9,6 +9,7 @@ import VendorLayout from '../layouts/Vendor'
 
 const Navigation = () => {
   const { user } = useAuthContext()
+  console.log({ user, isVendor: user?.isVendor })
   return (
     <>
       {user ? (

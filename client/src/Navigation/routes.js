@@ -1,6 +1,6 @@
 import env from '../configs/app.config'
 // components
-import Dashboard from 'pages/Landing'
+import Dashboard from 'pages/Dashboard'
 import Landing from 'pages/Landing'
 import Login from 'pages/Login'
 import Register from 'pages/Register'
@@ -14,8 +14,8 @@ var routes = [
     name: 'Dashboard',
     icon: 'ni ni-tv-2 text-primary',
     component: Dashboard,
-    layout: layouts.ADMIN,
-    supervisorAccess: true,
+    layout: layouts.VENDOR,
+    vendorAccess: true,
   },
 
   {

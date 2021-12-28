@@ -10,28 +10,65 @@ import {
   Nav,
   Container,
   Media,
+  NavItem,
+  Button,
 } from 'reactstrap'
 
-import useAuthContext from 'hooks/useAuthContext'
 import useAuth from 'hooks/useAuth'
+import useStorage from 'hooks/useStorage'
+import useAuthContext from 'hooks/useAuthContext'
 
 const AdminNavbar = (props) => {
   const { user } = useAuthContext()
   const { logout } = useAuth()
-
+  const { document, isLoading, error, uploadDocument, progress } =
+    useStorage('test')
+  const handleFileUpload = (e) => {
+    e.stopPropagation()
+    const file = e.target.files[0]
+    uploadDocument(file)
+  }
   return (
     <>
-      <Navbar className="navbar-top navbar-light " expand="md" id="navbar-main">
+      <Navbar
+        className="navbar-top navbar-light border-bottom"
+        expand="md"
+        id="navbar-main"
+      >
         <Container fluid>
           <Link
             className="h4 mb-0 text-secondary text-uppercase d-none d-lg-inline-block"
             to="/"
           >
-            {props.brandText}
+            {/* <Button primary type="file">
+              <i className="fa fa-upload mr-3" />
+              Upload your files
+            </Button> */}
+            <form>
+              <input
+                type="file"
+                id="avatar"
+                name="avatar"
+                accept="image/png, image/jpeg"
+                onClick={(e) => e.stopPropagation()}
+                onChange={handleFileUpload}
+              />
+            </form>
+            {error && <p>{error}</p>}
+            {document && <p>{document.toString()}</p>}
+            <p>{isLoading ? 'Loading' : 'not'}</p>
+            {progress != null && <p>{progress}</p>}
           </Link>
           <Form className="navbar-search navbar-search-light form-inline mr-3 d-none d-md-flex ml-lg-auto"></Form>
           <Nav className="align-items-center d-none d-md-flex" navbar>
-            sell your content
+            <NavItem>
+              <i className="fa fa-home"></i>
+            </NavItem>
+          </Nav>
+          <Nav className="align-items-center d-none d-md-flex ml-2" navbar>
+            <NavItem>
+              <i className="fa fa-bell"></i>
+            </NavItem>
           </Nav>
           <Nav className="align-items-center d-none d-md-flex" navbar>
             <UncontrolledDropdown nav>
@@ -47,13 +84,14 @@ const AdminNavbar = (props) => {
                     />
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
-                    <span className="mb-0 text-sm font-weight-bold">
-                      {user.displayName}
-                    </span>
+                    <div className="mb-0 text-sm font-weight-bold mb-0">
+                      {user.firstName}
+                    </div>
+                    <small>Level 1</small>
                   </Media>
                 </Media>
               </DropdownToggle>
-              <DropdownMenu className="dropdown-menu-arrow" right>
+              <DropdownMenu className="dropdown-menu-arrow" end>
                 <DropdownItem className="noti-title" header tag="div">
                   <h6 className="text-overflow m-0">Welcome!</h6>
                 </DropdownItem>

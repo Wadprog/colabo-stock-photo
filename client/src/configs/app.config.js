@@ -21,6 +21,7 @@ const environment = {
     layouts: {
       ADMIN: '/admin',
       AUTH: '/auth',
+      VENDOR: '/vendor',
     },
   },
   staging: {
@@ -48,6 +49,7 @@ const environment = {
     layouts: {
       ADMIN: '/admin',
       AUTH: '/auth',
+      VENDOR: '/vendor',
     },
   },
   production: {},

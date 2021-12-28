@@ -7,7 +7,7 @@ const SuperUserRoutes = ({ component: Component, ...rest }) => {
   if (!user?.isVendor) console.log('(setAlert)')
   return (
     <>
-      {user?.isVendor ? (
+      {user?.isVendor || user.isAdmin ? (
         <Route {...rest} render={(props) => <Component {...props} />} />
       ) : null}
     </>

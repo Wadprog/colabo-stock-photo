@@ -1,4 +1,4 @@
-import { auth } from '../configs/firebase'
+import { auth, db } from '../configs/firebase'
 import { createContext, useReducer, useEffect } from 'react'
 const Types = {
   USER_LOGGED_IN: 'LOGIN',
@@ -27,8 +27,22 @@ export const AuthContextProvider = ({ children }) => {
   console.log('Auth', state)
 
   useEffect(() => {
+    console.log('checking when auth changes')
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      dispatch({ type: Types.AUTH_IS_READY, payload: user })
+      console.log('state changed', user?.uid)
+      if (user)
+        db.collection('users')
+          .doc(user.uid)
+          .get()
+          .then((u) => {
+            const user = u ? { id: u.id, ...u.data() } : null
+            dispatch({ type: Types.AUTH_IS_READY, payload: user })
+          })
+          .catch((error) => {
+            console.log('error')
+            dispatch({ type: Types.AUTH_IS_READY, payload: null })
+          })
+      else dispatch({ type: Types.AUTH_IS_READY, payload: null })
       unsubscribe()
     })
   }, [])
