@@ -85,7 +85,19 @@ const Header = () => (
         </NavItem>
       </Nav>
       <Nav>
-        <NavItem className="text-secondary">Test</NavItem>
+        <NavItem>
+          <NavLink className="" href="/auth/login/">
+            Login
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink
+            className="collabo-btn btn btn-default btn-primary ml-3"
+            href="/auth/register/"
+          >
+            Register
+          </NavLink>
+        </NavItem>
       </Nav>
     </Collapse>
   </div>
