@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 // reactstrap components
 import {
   NavbarBrand,
@@ -7,18 +7,30 @@ import {
   Nav,
   NavItem,
   NavLink,
-} from 'reactstrap'
+} from "reactstrap";
+import Header from "../../components/Header";
 
 const AuthNavBar = () => {
   return (
     <>
-      <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
-        <Container className="px-4">
-          <NavbarBrand to="/" tag={Link}>
-            <h4>
-              Collabo<span className="text-muted">Photo</span>
-            </h4>
-          </NavbarBrand>
+      <Navbar
+        className="navbar-top navbar-horizontal navbar-dark d-flex flex-column"
+        expand="md"
+        color="light"
+      >
+        <div className="d-flex flex-column px-4">
+          <div className="p-2">
+            <NavbarBrand to="/" tag={Link}>
+              <h5>
+                <span className="fw-bold fs-6 text-secondary">
+                  Collabo Stock
+                </span>
+              </h5>
+            </NavbarBrand>
+          </div>
+          <div className="p-2"></div>
+          <Header />
+          {/* }
           <Nav>
             <NavItem>
               <NavLink href="/auth/login/">Login</NavLink>
@@ -30,10 +42,11 @@ const AuthNavBar = () => {
           <button className="navbar-toggler" id="navbar-collapse-main">
             <span className="navbar-toggler-icon" />
           </button>
-        </Container>
+            {*/}
+        </div>
       </Navbar>
     </>
-  )
-}
+  );
+};
 
-export default AuthNavBar
+export default AuthNavBar;

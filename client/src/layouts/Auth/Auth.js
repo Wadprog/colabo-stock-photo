@@ -1,43 +1,43 @@
-import { useEffect, useRef } from 'react'
-import { Container, Row } from 'reactstrap'
-import { useLocation, Route, Switch, Redirect } from 'react-router-dom'
+import { useEffect, useRef } from "react";
+import { Container, Row } from "reactstrap";
+import { useLocation, Route, Switch, Redirect } from "react-router-dom";
 
 // core components
-import AuthNavbar from '../../components/Navbars/AuthNavbar'
-import AuthFooter from '../../components/Footers/AuthFooter'
+import AuthNavbar from "../../components/Navbars/AuthNavbar";
+import AuthFooter from "../../components/Footers/AuthFooter";
 
-import routes from '../../Navigation/routes'
+import routes from "../../Navigation/routes";
 
 const Auth = () => {
-  const mainContent = useRef(null)
-  const location = useLocation()
+  const mainContent = useRef(null);
+  const location = useLocation();
 
   useEffect(() => {
-    document.body.classList.add('bg-default')
-    return () => document.body.classList.remove('bg-default')
-  }, [])
+    //document.body.classList.add("bg-default");
+    return () => document.body.classList.remove("bg-default");
+  }, []);
 
   useEffect(() => {
-    document.documentElement.scrollTop = 0
-    document.scrollingElement.scrollTop = 0
-    mainContent.current.scrollTop = 0
-  }, [location])
+    document.documentElement.scrollTop = 0;
+    document.scrollingElement.scrollTop = 0;
+    mainContent.current.scrollTop = 0;
+  }, [location]);
 
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === '/auth') {
+      if (prop.layout === "/auth") {
         return (
           <Route
             path={prop.layout + prop.path}
             component={prop.component}
-            key={'routes-' + key}
+            key={"routes-" + key}
           />
-        )
+        );
       } else {
-        return null
+        return null;
       }
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -46,11 +46,9 @@ const Auth = () => {
           <div className="col-md-3 offset-md-10 mr-2"></div>
         </Row>
         <AuthNavbar />
-        <div className="header bg-gradient-info py-7 py-lg-8">
-          <div className="separator separator-bottom separator-skew z-index-100"></div>
-        </div>
+
         {/* Page content */}
-        <Container className="mt--8 pb-5">
+        <Container className="mt-8 pb-5">
           <Row className="justify-content-center">
             <Switch>
               {getRoutes(routes)}
@@ -62,7 +60,7 @@ const Auth = () => {
       </div>
       <AuthFooter />
     </>
-  )
-}
+  );
+};
 
-export default Auth
+export default Auth;

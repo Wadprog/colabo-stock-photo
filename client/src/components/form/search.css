@@ -1,5 +1,5 @@
 .search {
-  background-color: rgb(253, 251, 251);
+  background-color: #ff6d00;
   padding: 4px;
   border-radius: 5px;
 }
@@ -7,15 +7,19 @@
 .search-1 {
   position: relative;
   width: 100%;
+  margin-left: 30px;
 }
 
 .search-1 .input {
-  height: 45px;
+  background-color: #0277bd;
+  height: 55px;
   border: none;
   width: 100%;
   padding-left: 34px;
-  padding-right: 10px;
-  border-right: 2px solid #eee;
+  padding-right: 0px;
+  color: #eee;
+  border-right: 2px solid #0277bd;
+  border-radius: 25px 0px 0px 25px;
 }
 
 .search-1 .input:focus {
@@ -29,7 +33,7 @@
   top: 12px;
   left: 5px;
   font-size: 24px;
-  color: #eee;
+  color: rgb(245, 245, 245);
 }
 
 ::placeholder {
@@ -40,14 +44,16 @@
 .search-2 {
   position: relative;
   width: 100%;
+  margin: 0px;
 }
 
 .search-2 input {
-  height: 45px;
+  height: 55px;
   border: none;
   width: 100%;
   padding-left: 18px;
   padding-right: 100px;
+  border-radius: 0px 25px 0px 0px;
 }
 
 .search-2 input:focus {
@@ -59,21 +65,21 @@
 .search-2 i {
   position: absolute;
   top: 12px;
-  left: -10px;
+  left: -5px;
   font-size: 24px;
-  color: #eee;
+  color: rgb(245, 245, 245);
 }
 
 .search-2 button {
   position: absolute;
-  right: 1px;
+  right: 0px;
   top: 0px;
   border: none;
-  height: 45px;
-  background-color: red;
+  height: 55px;
+  background-color: #0277bd;
   color: #fff;
-  width: 90px;
-  border-radius: 4px;
+  width: 60px;
+  border-radius: 25px 25px 0px 25px;
 }
 
 @media (max-width: 800px) {

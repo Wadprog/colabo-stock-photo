@@ -1,14 +1,14 @@
-import React from 'react'
-import { Row, Col } from 'reactstrap'
-import SingleImage from './Gallery/SingleImage'
-import { picture } from '../data/picture'
-import useCollection from '../hooks/useCollection'
-import ImageComponent from './Img'
+import React from "react";
+import { Row, Col } from "reactstrap";
+import SingleImage from "./Gallery/SingleImage";
+import { picture } from "../data/picture";
+import useCollection from "../hooks/useCollection";
+import ImageComponent from "./Img";
 
 const Gallery = () => {
-  const { documents, error, isLoading } = useCollection('test')
+  const { documents, error, isLoading } = useCollection("test");
 
-  if (error) return <p>error</p>
+  if (error) return <p>error</p>;
 
   return (
     <Row>
@@ -22,7 +22,7 @@ const Gallery = () => {
         <p>Loading</p>
       )}
     </Row>
-  )
-}
+  );
+};
 
-export default Gallery
+export default Gallery;
